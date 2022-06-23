@@ -67,12 +67,15 @@ class SshManagerApp(rumps.App):
 
         for item in prf.AVAILABLE_SERVERS:
             server = ServerModel(**item)
-            subprocess.run(
-                ['osascript','-e',f'tell app "Terminal" to do script ("{server.ssh_command}")']
-            ) if server.server_name == sender.title.strip() else None
 
-            if sound:
-                subprocess.run(['afplay',prf.DEFAULT_SOUND])
+            if server.server_name == sender.title.strip():
+                subprocess.run(
+                    ['osascript','-e',f'tell app "Terminal" to do script ("{server.ssh_command}")']
+                )
+
+                if sound:
+                    subprocess.run(['afplay',prf.DEFAULT_SOUND])
+                break
 
     @classmethod
     def edit_preferences(self, sender) -> None:
