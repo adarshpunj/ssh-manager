@@ -6,10 +6,12 @@ Author: Adarsh Punj
 June 2022
 '''
 
+from utils import __preferences__ as prf
+
 from dataclasses import dataclass
 import subprocess
-
-import preferences as prf
+import json
+import os
 
 import rumps
 
@@ -76,7 +78,7 @@ class SshManagerApp(rumps.App):
     def edit_preferences(self, sender) -> None:
 
         subprocess.run(
-            ['open','./preferences.py']
+            ['open','./preferences.json']
         )
 
 
@@ -85,4 +87,4 @@ class SshManagerApp(rumps.App):
         return prf.AVAILABLE_SERVERS
 
 if __name__ == '__main__':
-	SshManagerApp().run()
+    SshManagerApp().run()
